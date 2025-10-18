@@ -1,0 +1,77 @@
+import matplotlib.pyplot as plt
+import numpy as np
+
+# ------------------ Step 1: Sample Data ------------------
+students = ["Alice", "Bob", "Charlie", "David", "Eve"]
+math_marks = [85, 70, 90, 60, 75]
+science_marks = [80, 65, 88, 72, 78]
+english_marks = [75, 85, 70, 68, 82]
+
+# Convert to NumPy arrays for calculations
+math_arr = np.array(math_marks)
+science_arr = np.array(science_marks)
+english_arr = np.array(english_marks)
+average = (math_arr + science_arr + english_arr) / 3
+
+# ------------------ Step 2: Line Chart ------------------
+plt.figure(figsize=(12, 8))
+
+plt.subplot(2, 3, 1)
+plt.plot(students, math_marks, marker='o', color='b', label="Math")
+plt.plot(students, science_marks, marker='s', color='g', label="Science")
+plt.plot(students, english_marks, marker='^', color='r', label="English")
+plt.title("Line Chart - Marks in Different Subjects")
+plt.xlabel("Students")
+plt.ylabel("Marks")
+plt.legend()
+plt.grid(True)
+
+# ------------------ Step 3: Bar Chart ------------------
+plt.subplot(2, 3, 2)
+bar_width = 0.25
+x = np.arange(len(students))
+plt.bar(x - bar_width, math_marks, width=bar_width, color='b', label="Math")
+plt.bar(x, science_marks, width=bar_width, color='g', label="Science")
+plt.bar(x + bar_width, english_marks, width=bar_width, color='r', label="English")
+plt.xticks(x, students)
+plt.title("Bar Chart - Comparison of Marks")
+plt.xlabel("Students")
+plt.ylabel("Marks")
+plt.legend()
+
+# ------------------ Step 4: Scatter Plot ------------------
+plt.subplot(2, 3, 3)
+plt.scatter(math_marks, science_marks, color='purple', s=100)
+plt.title("Scatter Plot - Math vs Science")
+plt.xlabel("Math Marks")
+plt.ylabel("Science Marks")
+plt.grid(True)
+
+# ------------------ Step 5: Pie Chart ------------------
+plt.subplot(2, 3, 4)
+subjects = ["Math", "Science", "English"]
+avg_subject = [np.mean(math_marks), np.mean(science_marks), np.mean(english_marks)]
+colors = ['lightblue', 'lightgreen', 'lightcoral']
+plt.pie(avg_subject, labels=subjects, autopct="%1.1f%%", colors=colors, startangle=140)
+plt.title("Pie Chart - Average Marks per Subject")
+
+# ------------------ Step 6: Histogram ------------------
+plt.subplot(2, 3, 5)
+plt.hist(average, bins=5, color='orange', edgecolor='black')
+plt.title("Histogram - Distribution of Average Marks")
+plt.xlabel("Average Marks")
+plt.ylabel("Number of Students")
+
+# ------------------ Step 7: Line Chart of Averages ------------------
+plt.subplot(2, 3, 6)
+plt.plot(students, average, color='magenta', marker='D', linestyle='--', label="Average")
+plt.title("Average Performance")
+plt.xlabel("Students")
+plt.ylabel("Average Marks")
+plt.legend()
+plt.grid(True)
+
+# Adjust layout and show all charts
+plt.tight_layout()
+plt.suptitle("Student Performance Visualization", fontsize=16, fontweight='bold', y=1.03)
+plt.show()
